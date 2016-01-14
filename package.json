@@ -1,0 +1,6 @@
+{
+  "name"    : "compiler",
+  "version" : "0.0.1",
+  "vendor"  : "ecmal",
+  "main"    : "typescript"
+}
