@@ -1,6 +1,10 @@
 {
-  "name"    : "compiler",
-  "version" : "0.0.1",
-  "vendor"  : "ecmal",
-  "main"    : "typescript"
+  "name"          : "compiler",
+  "vendor"        : "ecmal",
+  "version"       : "0.0.1",
+  "main"          : "index",
+  "directories"   : {
+    "source"      : "src",
+    "vendor"      : "out"
+  }
 }
