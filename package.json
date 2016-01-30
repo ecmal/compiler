@@ -2,9 +2,13 @@
   "name"          : "compiler",
   "vendor"        : "ecmal",
   "version"       : "0.0.1",
+  "registry"      : "github",
   "main"          : "index",
   "directories"   : {
     "source"      : "src",
     "vendor"      : "out"
+  },
+  "libraries"     : {
+    "core"        : "0.0.1"
   }
 }
