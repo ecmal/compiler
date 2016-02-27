@@ -3,12 +3,12 @@
   "vendor"        : "ecmal",
   "version"       : "0.0.1",
   "registry"      : "github",
-  "main"          : "index",
   "directories"   : {
     "source"      : "src",
     "vendor"      : "out"
   },
   "libraries"     : {
-    "core"        : "0.0.1"
+    "core"        : "0.0.1",
+    "runtime"     : "0.0.2"
   }
 }
