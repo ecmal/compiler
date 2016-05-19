@@ -5650,15 +5650,19 @@ const __super = (function (geti, seti) {
                 emitDeclarationName(node);
                 write(" = ")
                 writeLine();
+                //type,name,flags,designType,returnType,decorators,parameters,interfaces
                 write("__decorate(")
                 emitDeclarationKind(node);
-                write(', 0');
+                write(', "constructor", ');
                 if(constructor){
-                    write(', '+(getDecoratedMemberFlags(constructor.flags)|getDecoratedMemberFlags(node.flags)));
+                    write(String((getDecoratedMemberFlags(constructor.flags)|getDecoratedMemberFlags(node.flags))));
+                }else{
+                    write('null')
                 }
 
-                write(", 0, 0, 0, [");
+                write(", null, null, ");
                 if(decorators && decorators.length){
+                    write("[");
                     emitStart(decorators);
                     writeLine();
                     increaseIndent();
@@ -5673,17 +5677,21 @@ const __super = (function (geti, seti) {
                     decreaseIndent();
                     writeLine();
                     emitEnd(decorators);
+                    write(']');
+                }else{
+                    write('null');
                 }
-                write(']');
-                
+                write(', ')
                 if(constructor && constructor.parameters && constructor.parameters.length){
-                    write(',[');
+                    write('[');
                     writeLine();
                     increaseIndent();
                     emitParametersOfMethod(constructor);
                     decreaseIndent();
                     writeLine();
                     write(']');
+                }else{
+                    write('null')
                 }
                 var symbols:Symbol[] = [];
                 if(node.heritageClauses && node.heritageClauses.length){
@@ -5698,8 +5706,9 @@ const __super = (function (geti, seti) {
                         }
                     })
                 }
+                write(',')
                 if(symbols.length){
-                    write(',[');
+                    write('[');
                     writeLine();
                     increaseIndent();
                     symbols.forEach((symbol,index)=>{
@@ -5716,6 +5725,8 @@ const __super = (function (geti, seti) {
                     decreaseIndent();
                     writeLine();
                     write(']');
+                }else{
+                    write('null');
                 }
                 write(");");
                 writeLine();

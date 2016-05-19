@@ -37115,14 +37115,19 @@ system.register("compiler/index", [], function(system,module) {
                   emitDeclarationName(node);
                   write(" = ");
                   writeLine();
+                  //type,name,flags,designType,returnType,decorators,parameters,interfaces
                   write("__decorate(");
                   emitDeclarationKind(node);
-                  write(', 0');
+                  write(', "constructor", ');
                   if (constructor) {
-                      write(', ' + (getDecoratedMemberFlags(constructor.flags) | getDecoratedMemberFlags(node.flags)));
+                      write(String((getDecoratedMemberFlags(constructor.flags) | getDecoratedMemberFlags(node.flags))));
                   }
-                  write(", 0, 0, 0, [");
+                  else {
+                      write('null');
+                  }
+                  write(", null, null, ");
                   if (decorators && decorators.length) {
+                      write("[");
                       emitStart(decorators);
                       writeLine();
                       increaseIndent();
@@ -37134,16 +37139,23 @@ system.register("compiler/index", [], function(system,module) {
                       decreaseIndent();
                       writeLine();
                       emitEnd(decorators);
+                      write(']');
                   }
-                  write(']');
+                  else {
+                      write('null');
+                  }
+                  write(', ');
                   if (constructor && constructor.parameters && constructor.parameters.length) {
-                      write(',[');
+                      write('[');
                       writeLine();
                       increaseIndent();
                       emitParametersOfMethod(constructor);
                       decreaseIndent();
                       writeLine();
                       write(']');
+                  }
+                  else {
+                      write('null');
                   }
                   var symbols = [];
                   if (node.heritageClauses && node.heritageClauses.length) {
@@ -37158,8 +37170,9 @@ system.register("compiler/index", [], function(system,module) {
                           }
                       });
                   }
+                  write(',');
                   if (symbols.length) {
-                      write(',[');
+                      write('[');
                       writeLine();
                       increaseIndent();
                       symbols.forEach(function (symbol, index) {
@@ -37176,6 +37189,9 @@ system.register("compiler/index", [], function(system,module) {
                       decreaseIndent();
                       writeLine();
                       write(']');
+                  }
+                  else {
+                      write('null');
                   }
                   write(");");
                   writeLine();
