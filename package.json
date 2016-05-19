@@ -9,6 +9,6 @@
     "vendor"      : "out"
   },
   "libraries"     : {
-    "core"        : "0.0.1"
+    "core"        : "0.0.8"
   }
 }
