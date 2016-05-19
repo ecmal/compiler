@@ -1,7 +1,7 @@
 {
   "name"          : "compiler",
   "vendor"        : "ecmal",
-  "version"       : "0.0.1",
+  "version"       : "0.0.8",
   "registry"      : "github",
   "main"          : "index",
   "directories"   : {
@@ -9,6 +9,6 @@
     "vendor"      : "out"
   },
   "libraries"     : {
-    "core"        : "0.0.8"
+    "core"        : "0.0.1"
   }
 }
