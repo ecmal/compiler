@@ -1,2 +1,2 @@
 # browser
-Browser Standard Library Definition
+Typescript Compiler Wrapper for ELP project
