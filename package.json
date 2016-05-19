@@ -1,0 +1,36 @@
+{
+  "name": "compiler",
+  "vendor": "ecmal",
+  "version": "0.0.1",
+  "registry": "github",
+  "bundle": false,
+  "libraries": {
+    "core": "0.0.8"
+  },
+  "author": {
+    "name": "Sergey Mamyan",
+    "email": "sergey.mamyan@gmail.com"
+  },
+  "commit": "33ee91180db0094fbc25e73d461e1db7fc1cca47",
+  "repository": "https://github.com/ecmal/compiler.git",
+  "modules": {
+    "index": {
+      "name": "index",
+      "version": "e67ea5b6bb5d32ed4e624b51f76f860f",
+      "size": 3262343,
+      "hash": "208004648b69c18a23ec0f3b7a94fbdb",
+      "files": {
+        ".d.ts": {
+          "size": 88876,
+          "hash": "e67ea5b6bb5d32ed4e624b51f76f860f",
+          "sha": "6c5214910f75c6451402c7bb80252fd5a791e2d9"
+        },
+        ".js": {
+          "size": 3262343,
+          "hash": "208004648b69c18a23ec0f3b7a94fbdb",
+          "sha": "c0f707e329eebddd008caa75fa242b074f4a527a"
+        }
+      }
+    }
+  }
+}
