@@ -37157,34 +37157,38 @@ system.register("compiler/index", [], function(system,module) {
                   else {
                       write('null');
                   }
-                  var symbols = [];
+                  var impls = [];
                   if (node.heritageClauses && node.heritageClauses.length) {
                       node.heritageClauses.forEach(function (h) {
                           if (h.token == 106 /* ImplementsKeyword */ && h.types && h.types.length) {
                               h.types.forEach(function (e) {
-                                  var typeSymbol = resolver.resolveEntityName(e.expression, 793056 /* Type */, true);
-                                  if ((typeSymbol.flags & 64 /* Interface */) == 64 /* Interface */ && typeSymbol.parent) {
-                                      symbols.push(typeSymbol);
-                                  }
+                                  impls.push(e);
                               });
                           }
                       });
                   }
                   write(',');
-                  if (symbols.length) {
+                  if (impls.length) {
                       write('[');
                       writeLine();
                       increaseIndent();
-                      symbols.forEach(function (symbol, index) {
+                      impls.forEach(function (symbol, index) {
                           if (index > 0) {
                               write(',');
                               writeLine();
                           }
-                          write('__type(');
-                          write(symbol.parent.name);
-                          write(',"');
-                          write(symbol.name);
-                          write('")');
+                          if (symbol.typeArguments && symbol.typeArguments.length) {
+                              write('__type(');
+                              emit(symbol.expression);
+                              symbol.typeArguments.forEach(function (t) {
+                                  write(',');
+                                  emitSerializedTypeNode(t);
+                              });
+                              write(')');
+                          }
+                          else {
+                              emit(symbol.expression);
+                          }
                       });
                       decreaseIndent();
                       writeLine();
@@ -38503,6 +38507,9 @@ system.register("compiler/index", [], function(system,module) {
                       for (var _b = 0, hoistedInterfaceDeclarations_1 = hoistedInterfaceDeclarations; _b < hoistedInterfaceDeclarations_1.length; _b++) {
                           var f = hoistedInterfaceDeclarations_1[_b];
                           writeLine();
+                          write('var ');
+                          emitDeclarationName(f);
+                          write(' = ');
                           write('module.define("interface","');
                           emitDeclarationName(f);
                           write('");');

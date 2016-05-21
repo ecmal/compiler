@@ -5693,34 +5693,38 @@ const __super = (function (geti, seti) {
                 }else{
                     write('null')
                 }
-                var symbols:Symbol[] = [];
+
+                var impls:ExpressionWithTypeArguments[]=[];
                 if(node.heritageClauses && node.heritageClauses.length){
                     node.heritageClauses.forEach((h:HeritageClause)=>{
                         if(h.token == SyntaxKind.ImplementsKeyword && h.types && h.types.length){
                             h.types.forEach((e:ExpressionWithTypeArguments)=>{
-                                var typeSymbol = resolver.resolveEntityName(e.expression,SymbolFlags.Type,true);
-                                if((typeSymbol.flags & SymbolFlags.Interface) == SymbolFlags.Interface && typeSymbol.parent){
-                                    symbols.push(typeSymbol);
-                                }
+                                impls.push(e)
                             })
                         }
                     })
                 }
                 write(',')
-                if(symbols.length){
+                if(impls.length){
                     write('[');
                     writeLine();
                     increaseIndent();
-                    symbols.forEach((symbol,index)=>{
+                    impls.forEach((symbol,index)=>{
                         if(index>0){
                             write(',');
                             writeLine();
                         }
-                        write('__type(');
-                        write(symbol.parent.name)
-                        write(',"')
-                        write(symbol.name)
-                        write('")');
+                        if(symbol.typeArguments && symbol.typeArguments.length){
+                            write('__type(');
+                            emit(symbol.expression);
+                            symbol.typeArguments.forEach((t:TypeNode)=>{
+                                write(',');
+                                emitSerializedTypeNode(t);
+                            })
+                            write(')');
+                        }else{
+                            emit(symbol.expression)
+                        }
                     })
                     decreaseIndent();
                     writeLine();
@@ -7147,6 +7151,9 @@ const __super = (function (geti, seti) {
                 if (hoistedInterfaceDeclarations) {
                     for (const f of hoistedInterfaceDeclarations) {
                         writeLine();
+                        write('var ');
+                        emitDeclarationName(f);
+                        write(' = ');
                         write('module.define("interface","')
                         emitDeclarationName(f);
                         write('");')
