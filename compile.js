@@ -1,7 +1,10 @@
 var exec = require('child_process').execSync;
+var path = require('fs');
 var fs = require('fs');
-//var out = '/Users/Sergey/Work/BB/ecmal/elp/out/compiler/index.js';
-var out = '/Users/Sergey/Work/GH/ecmal/compiler/src';
+
+//var out = '/Users/Sergey/Work/BB/ecmal/elp/out/compiler';
+var out = './src';
+
 exec('jake',{
     cwd     : './typescript',
     stdio   : 'inherit',

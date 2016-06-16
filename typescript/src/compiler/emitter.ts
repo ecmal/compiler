@@ -5695,16 +5695,50 @@ const __super = (function (geti, seti) {
                 }
 
                 var impls:ExpressionWithTypeArguments[]=[];
+                var extds:ExpressionWithTypeArguments[]=[];
                 if(node.heritageClauses && node.heritageClauses.length){
                     node.heritageClauses.forEach((h:HeritageClause)=>{
                         if(h.token == SyntaxKind.ImplementsKeyword && h.types && h.types.length){
                             h.types.forEach((e:ExpressionWithTypeArguments)=>{
                                 impls.push(e)
                             })
+                        }else
+                        if(h.token == SyntaxKind.ExtendsKeyword && h.types && h.types.length){
+                            h.types.forEach((e:ExpressionWithTypeArguments)=>{
+                                extds.push(e)
+                            })
                         }
                     })
                 }
-                write(',')
+                write(',');
+                if(extds.length){
+                    write('[');
+                    writeLine();
+                    increaseIndent();
+                    extds.forEach((symbol,index)=>{
+                        if(index>0){
+                            write(',');
+                            writeLine();
+                        }
+                        if(symbol.typeArguments && symbol.typeArguments.length){
+                            write('__type(');
+                            emit(symbol.expression);
+                            symbol.typeArguments.forEach((t:TypeNode)=>{
+                                write(',');
+                                emitSerializedTypeNode(t);
+                            });
+                            write(')');
+                        }else{
+                            emit(symbol.expression)
+                        }
+                    });
+                    decreaseIndent();
+                    writeLine();
+                    write(']');
+                }else{
+                    write('null');
+                }
+                write(',');
                 if(impls.length){
                     write('[');
                     writeLine();
@@ -5720,12 +5754,12 @@ const __super = (function (geti, seti) {
                             symbol.typeArguments.forEach((t:TypeNode)=>{
                                 write(',');
                                 emitSerializedTypeNode(t);
-                            })
+                            });
                             write(')');
                         }else{
                             emit(symbol.expression)
                         }
-                    })
+                    });
                     decreaseIndent();
                     writeLine();
                     write(']');

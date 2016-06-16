@@ -37158,6 +37158,7 @@ system.register("compiler/index", [], function(system,module) {
                       write('null');
                   }
                   var impls = [];
+                  var extds = [];
                   if (node.heritageClauses && node.heritageClauses.length) {
                       node.heritageClauses.forEach(function (h) {
                           if (h.token == 106 /* ImplementsKeyword */ && h.types && h.types.length) {
@@ -37165,7 +37166,42 @@ system.register("compiler/index", [], function(system,module) {
                                   impls.push(e);
                               });
                           }
+                          else if (h.token == 83 /* ExtendsKeyword */ && h.types && h.types.length) {
+                              h.types.forEach(function (e) {
+                                  extds.push(e);
+                              });
+                          }
                       });
+                  }
+                  write(',');
+                  if (extds.length) {
+                      write('[');
+                      writeLine();
+                      increaseIndent();
+                      extds.forEach(function (symbol, index) {
+                          if (index > 0) {
+                              write(',');
+                              writeLine();
+                          }
+                          if (symbol.typeArguments && symbol.typeArguments.length) {
+                              write('__type(');
+                              emit(symbol.expression);
+                              symbol.typeArguments.forEach(function (t) {
+                                  write(',');
+                                  emitSerializedTypeNode(t);
+                              });
+                              write(')');
+                          }
+                          else {
+                              emit(symbol.expression);
+                          }
+                      });
+                      decreaseIndent();
+                      writeLine();
+                      write(']');
+                  }
+                  else {
+                      write('null');
                   }
                   write(',');
                   if (impls.length) {
@@ -55151,7 +55187,7 @@ system.register("compiler/index", [], function(system,module) {
   /* @internal */
   var toolsVersion = "1.8";
   /* tslint:enable:no-unused-variable */ 
-  //# sourceMappingURL=file:////Users/Sergey/Work/GH/ecmal/compiler/typescript/built/local/typescriptServices.js.map
+  //# sourceMappingURL=file:////Users/Sergey/Work/BB/ecmal/compiler/typescript/built/local/typescriptServices.js.map
   module.export("TypeScript", ts);
   module.export("default",ts);
   return {setters:[],execute:function(){}}
