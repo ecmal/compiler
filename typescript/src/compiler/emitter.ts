@@ -1256,13 +1256,13 @@ __.awaiter = __.awaiter || function (thisArg, _arguments, P, generator) {
 
                 function emitJsxElement(openingNode: JsxOpeningLikeElement, children?: JsxChild[]) {
                     const syntheticReactRef = <Identifier>createSynthesizedNode(SyntaxKind.Identifier);
-                    syntheticReactRef.text = compilerOptions.reactNamespace ? compilerOptions.reactNamespace : "React";
+                    syntheticReactRef.text = "jsx";
                     syntheticReactRef.parent = openingNode;
 
                     // Call React.createElement(tag, ...
                     emitLeadingComments(openingNode);
                     emitExpressionIdentifier(syntheticReactRef);
-                    write(".createElement(");
+                    write(".$(");
                     emitTagName(openingNode.tagName);
                     write(", ");
 
@@ -1276,7 +1276,7 @@ __.awaiter = __.awaiter || function (thisArg, _arguments, P, generator) {
                         // a call to the __assign helper
                         const attrs = openingNode.attributes;
                         if (forEach(attrs, attr => attr.kind === SyntaxKind.JsxSpreadAttribute)) {
-                            write("__.assign(");
+                            write("jsx._(");
 
                             let haveOpenedObjectLiteral = false;
                             for (let i = 0; i < attrs.length; i++) {
@@ -1327,9 +1327,18 @@ __.awaiter = __.awaiter || function (thisArg, _arguments, P, generator) {
                         }
                     }
 
+
                     // Children
                     if (children) {
+                        if(children.length>1) {
+                            writeLine();
+                            increaseIndent();
+                        }
                         for (let i = 0; i < children.length; i++) {
+                            if(i>0) {
+                                writeLine();
+                            }
+
                             // Don't emit empty expressions
                             if (children[i].kind === SyntaxKind.JsxExpression && !((<JsxExpression>children[i]).expression)) {
                                 continue;
@@ -1350,6 +1359,11 @@ __.awaiter = __.awaiter || function (thisArg, _arguments, P, generator) {
                             }
 
                         }
+                        if(children.length>1){
+                            decreaseIndent();
+                            writeLine();
+                        }
+
                     }
 
                     // Closing paren
@@ -5208,7 +5222,7 @@ const __super = (function (geti, seti) {
                         writeLine();
                         emitStart(baseTypeElement);
                         if (languageVersion < ScriptTarget.ES6) {
-                            write("__super.apply(this, arguments);");
+                            write("return __super.apply(this, arguments);");
                         }
                         else {
                             write("super(...args);");
@@ -5634,6 +5648,20 @@ const __super = (function (geti, seti) {
                     emitDeclarationName(node);
                     write(".__decorator = function(__decorate,__type){")
                     increaseIndent();
+                    if(node.typeParameters){
+                        writeLine();
+                        write('var ');
+                        node.typeParameters.forEach((tp,i)=>{
+                            if(i>0){
+                                write(', ');
+                            }
+                            write(tp.name.text);
+                            write(' = __type("');
+                            write(tp.name.text);
+                            write('")');
+                        })
+                        write(';');
+                    }
                     emitDecoratorsOfMembers(node, NodeFlags.None);
                     emitDecoratorsOfMembers(node, NodeFlags.Static);
                     emitDecoratorsOfConstructor(node, decoratedClassAlias);
@@ -5762,6 +5790,19 @@ const __super = (function (geti, seti) {
                     });
                     decreaseIndent();
                     writeLine();
+                    write(']');
+                }else{
+                    write('null');
+                }
+                write(',')
+                if(node.typeParameters){
+                    write('[');
+                    node.typeParameters.forEach((tp,i)=>{
+                        if(i>0){
+                            write(', ');
+                        }
+                        write(tp.name.text);
+                    })
                     write(']');
                 }else{
                     write('null');
@@ -7585,7 +7626,11 @@ const __super = (function (geti, seti) {
 
                     write(text);
                 }
-                write(`], function(system,module) {`);
+                write(`], function(system,module`);
+                if(compilerOptions.jsx){
+                    write(`,jsx`);
+                }
+                write(`) {`);
                 writeLine();
                 increaseIndent();
                 const startIndex = emitDirectivePrologues(node.statements, /*startWithNewLine*/ true, /*ensureUseStrict*/ !compilerOptions.noImplicitUseStrict);
