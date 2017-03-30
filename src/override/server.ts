@@ -73,10 +73,7 @@ namespace ts.server {
             types = types.filter((e,i,a)=>(e && a.indexOf(e)==i));
             compilerOptions.types = types;
         }
-        
-        let result = superConfigFileParser({compilerOptions},host,basePath,existingOptions,configFileName,resolutionStack,extraFileExtensions)
-        Logger.default.debug("package.json",{basePath,existingOptions,configFileName,resolutionStack,extraFileExtensions,json,result});
-        return result;
+        return superConfigFileParser({compilerOptions},host,basePath,existingOptions,configFileName,resolutionStack,extraFileExtensions);
     }
     Object.defineProperty(ts,'parseJsonConfigFileContent',{value:parseJsonConfigFileContent});
     Object.defineProperty(ProjectService.prototype,'findConfigFile',{value:findConfigFile});

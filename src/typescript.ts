@@ -10,6 +10,5 @@
 /// <reference path="../typescript/src/server/types.ts"/>
 /// <reference path="../typescript/src/server/typingsCache.ts"/>
 /// <reference path="../typescript/src/server/utilities.ts"/>
-/// <reference path="../typescript/src/server/logger.ts"/>
 /// <reference path="../typescript/src/services/shims.ts"/>
 /// <reference path="../typescript/src/services/utilities.ts"/>

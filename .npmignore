@@ -1,0 +1,7 @@
+typescript/
+src/
+tsc.sh
+compile.sh
+copy.js
+tsconfig.*
+typescript.*

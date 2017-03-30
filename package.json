@@ -1,14 +1,24 @@
 {
-  "name"          : "compiler",
-  "vendor"        : "ecmal",
-  "version"       : "0.0.10",
-  "registry"      : "github",
-  "main"          : "index",
-  "directories"   : {
-    "source"      : "src",
-    "vendor"      : "out"
-  },
-  "libraries"     : {
-    "core"        : "0.0.8"
-  }
+    "name"              : "@ecmal/compiler",
+    "version"           : "3.0.0-ECL",
+    "description"       : "Ecmal Typescript Compiler",
+    "license"           : "UNLICENSED",
+    "author"            : "Mamble Inc. <ecmal@mamble.co>",
+    "repository"        : "https://github.com/ecmal/compiler.git",
+    "contributors"      : ["Sergey Mamyan <sergey@mamble.co>"],
+    "homepage"          : "https://github.com/ecmal/compiler",
+    "bugs"              : "https://github.com/ecmal/compiler/issues",
+    "keywords"          : ["typescript","ecmal","compiler"],
+    "types"             : "index.d.ts",
+    "main"              : "index.js",
+    "engines"           : {},
+    "bundle"            : true,
+    "bin"               : {
+        "elc"           : "./bin/elc",
+        "els"           : "./bin/els"
+    },
+    "directories"       : {
+        "src"           : "./src",
+        "out"           : "./node_modules"
+    }
 }
