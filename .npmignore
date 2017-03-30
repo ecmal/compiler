@@ -1,5 +1,6 @@
 typescript/
 src/
+.gitmodules
 tsc.sh
 compile.sh
 copy.js
