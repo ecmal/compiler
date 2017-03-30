@@ -1,4 +1,4 @@
 [submodule "typescript"]
-    path = typescript
-    url = https://github.com/ecmal/typescript.git
+	path = typescript
+	url = https://github.com/ecmal/typescript.git
     branch = elp-changes
