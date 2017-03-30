@@ -1,0 +1,15 @@
+/// <reference path="../typescript/src/server/editorServices.ts"/>
+/// <reference path="../typescript/src/server/editorServices.ts"/>
+/// <reference path="../typescript/src/server/lsHost.ts"/>
+/// <reference path="../typescript/src/server/project.ts"/>
+/// <reference path="../typescript/src/server/protocol.ts"/>
+/// <reference path="../typescript/src/server/scriptInfo.ts"/>
+/// <reference path="../typescript/src/server/scriptVersionCache.ts"/>
+/// <reference path="../typescript/src/server/session.ts"/>
+/// <reference path="../typescript/src/server/shared.ts"/>
+/// <reference path="../typescript/src/server/types.ts"/>
+/// <reference path="../typescript/src/server/typingsCache.ts"/>
+/// <reference path="../typescript/src/server/utilities.ts"/>
+/// <reference path="../typescript/src/server/logger.ts"/>
+/// <reference path="../typescript/src/services/shims.ts"/>
+/// <reference path="../typescript/src/services/utilities.ts"/>

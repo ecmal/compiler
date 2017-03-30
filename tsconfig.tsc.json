@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json.schemastore.org/tsconfig",
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "target": "es5",
+        "allowJs": false,
+        "declaration": false,
+        "sourceMap": false,
+        "removeComments": true,
+        "lib": ["es6"],
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outFile": "./lib/tsc.js"
+    },
+    "files": [
+        //"./src/node.d.ts",
+        //"./src/typescript.ts",
+        //"./src/override.ts",
+        //"./src/compiler.ts",
+        "./src/typescript-tsc.ts"
+    ]
+}

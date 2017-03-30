@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "allowJs": false,
+        "declaration": false,
+        "sourceMap": false,
+        "removeComments": true,
+        "lib": ["es6"],
+        "outFile": "./lib/tsserver.js"
+    },
+    "files": [
+        //"./src/node.d.ts",
+        //"./src/typescript.ts",
+        //"./src/override.ts",
+        //"./src/server.ts",
+        "./src/typescript-tss.ts"
+    ]
+}

@@ -1,5 +1,10 @@
 .DS_Store
 out
+lib/tsc.js
+lib/tsserver.js
+lib/typescript.d.ts
+lib/typescript.js
+lib/typescript.js.map
 *.log
 *.pid
 *.seed

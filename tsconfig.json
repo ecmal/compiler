@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "allowJs": false,
+        "declaration": true,
+        "sourceMap": true,
+        "noEmitHelpers": true,
+        "removeComments": true,
+        "lib": ["es6"],
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outFile": "./typescript.js"
+    },
+    "files": [
+        "./src/header.ts",
+        "./src/typescript.ts",
+        "./src/override/compiler.ts",
+        "./src/override/emitters.ts",
+        "./src/elc/cli.ts",
+        "./src/elc/project.ts",
+        "./src/footer.ts"
+    ]
+}
