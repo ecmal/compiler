@@ -11,6 +11,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "outFile": "./lib/tsc.js"
+        //"outFile":"/usr/local/lib/node_modules/@ecmal/compiler/lib/tsc.js"
     },
     "files": [
         //"./src/node.d.ts",

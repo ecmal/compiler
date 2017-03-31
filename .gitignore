@@ -2,9 +2,9 @@
 out
 lib/tsc.js
 lib/tsserver.js
-lib/typescript.d.ts
-lib/typescript.js
-lib/typescript.js.map
+typescript.d.ts
+typescript.js
+typescript.js.map
 *.log
 *.pid
 *.seed

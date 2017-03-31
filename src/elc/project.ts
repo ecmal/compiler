@@ -136,6 +136,7 @@ namespace ts {
                     module                  : ModuleKind.System,
                     moduleResolution        : ModuleResolutionKind.NodeJs,
                     target                  : ScriptTarget.ES5,
+                    noLib                   : true,
                     declaration             : true,
                     jsxFactory              : "JSX",
                     jsx                     : JsxEmit.React,
