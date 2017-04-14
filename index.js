@@ -75304,6 +75304,7 @@ var ts;
                     module: ts.ModuleKind.System,
                     moduleResolution: ts.ModuleResolutionKind.NodeJs,
                     target: 1,
+                    noLib: true,
                     declaration: true,
                     jsxFactory: "JSX",
                     jsx: 2,

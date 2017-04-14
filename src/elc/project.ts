@@ -16,7 +16,7 @@ namespace ts {
     }
     export interface ProjectServiceOptions {
         watch?:boolean;
-        target?:boolean;
+        target?:string;
     }
 
     export class Project {
@@ -78,13 +78,24 @@ namespace ts {
         }
         public getTargetDir(){
             if(!this.cached.targetDir){
-                let dirs = this.options.directories;
-                let rel = (dirs && dirs.out)?dirs.out:'.';
-                if(this.isLibrary()){
-                    rel = this.getName().split('/').map(()=>'..').join('/')
+                let serviceTarget = this.service.getOptions().target;
+                if(serviceTarget){
+                    serviceTarget = normalizePath(combinePaths(
+                        this.getHost().getCurrentDirectory(),serviceTarget
+                    ));
                 }
-                rel = normalizePath(combinePaths(this.dirname,rel));
-                this.cached.targetDir = rel;
+                
+                if(serviceTarget){
+                    this.cached.targetDir = serviceTarget;
+                }else{
+                    let dirs = this.options.directories;
+                    let rel = (dirs && dirs.out)?dirs.out:'.';
+                    if(this.isLibrary()){
+                        rel = this.getName().split('/').map(()=>'..').join('/')
+                    }
+                    rel = normalizePath(combinePaths(this.dirname,rel));
+                    this.cached.targetDir = rel;
+                }               
             }
             return this.cached.targetDir;
         }
