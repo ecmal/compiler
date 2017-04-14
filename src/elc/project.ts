@@ -149,7 +149,6 @@ namespace ts {
                     target                  : ScriptTarget.ES5,
                     noLib                   : true,
                     declaration             : true,
-                    jsxFactory              : "JSX",
                     jsx                     : JsxEmit.React,
                     sourceMap               : true,
                     experimentalDecorators  : true,
